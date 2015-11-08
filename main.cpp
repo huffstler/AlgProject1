@@ -12,18 +12,18 @@ struct AdjListNode{
 	int dest;
 	struct AdjListNode* next;
 };
+
 struct AdjList{
 	struct AdjListNode *head;
 };
 
-class Graph
-{
+class Graph {
     private:
         int V;
         struct AdjList* array;
     public:
-        Graph(int V)
-        {
+        Graph(int V) {
+
             this->V = V;
             array = new AdjList [V];
             for (int i = 0; i < V; ++i)
@@ -32,8 +32,7 @@ class Graph
 
         
         // Creating New Adjacency List Node
-        AdjListNode* newAdjListNode(int dest)
-        {
+        AdjListNode* newAdjListNode (int dest) {
             AdjListNode* newNode = new AdjListNode;
             newNode->dest = dest;
             newNode->next = NULL;
@@ -42,8 +41,7 @@ class Graph
         
         
 		// Adds an Edge to Graph
-        void addEdge(int src, int dest)
-        {
+        void addEdge (int src, int dest) {
             AdjListNode* newNode = newAdjListNode(dest);
             newNode->next = array[src].head;
             array[src].head = newNode;
@@ -54,15 +52,12 @@ class Graph
  
  	
         // Prints the graph
-        void printGraph()
-        {
+        void printGraph() {
             int v;
-            for (v = 0; v < V; ++v)
-            {
+            for (v = 0; v < V; ++v){
                 AdjListNode* pCrawl = array[v].head;
                 cout<<"\n Adjacency list of vertex "<<v<<"\n head ";
-                while (pCrawl)
-                {
+                while (pCrawl){
                     cout<<"-> "<<pCrawl->dest;
                     pCrawl = pCrawl->next;
                 }
@@ -71,9 +66,11 @@ class Graph
         }
 };
 
+Graph mkGraph () {
+	
+}
 
-int main ( int argc, char *argv[] )
-{
+int main ( int argc, char *argv[] ) {
 	if ( argc != 2 ) {
 		cout<<"Too many input parameters. Please only give one text file" << argv[0] << "<filename>\n";
 	}
@@ -93,7 +90,3 @@ int main ( int argc, char *argv[] )
 	//file implicitly closed.
 	}
 }
-
-/*graph inputText(file fileInput){
-	
-}*/
