@@ -1,10 +1,11 @@
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include <cmath>
 #include <queue>
-#include <fstream>
 #include <string>
 #include <array>
+
 using namespace std;
 
 struct AdjListNode{
@@ -14,7 +15,6 @@ struct AdjListNode{
 struct AdjList{
 	struct AdjListNode *head;
 };
-
 
 class Graph
 {
@@ -29,9 +29,9 @@ class Graph
             for (int i = 0; i < V; ++i)
                 array[i].head = NULL;
         }
-        /*
-         * Creating New Adjacency List Node
-         */ 
+
+        
+        // Creating New Adjacency List Node
         AdjListNode* newAdjListNode(int dest)
         {
             AdjListNode* newNode = new AdjListNode;
@@ -39,9 +39,9 @@ class Graph
             newNode->next = NULL;
             return newNode;
         }
-        /*
-         * Adding Edge to Graph
-         */ 
+        
+        
+		// Adds an Edge to Graph
         void addEdge(int src, int dest)
         {
             AdjListNode* newNode = newAdjListNode(dest);
@@ -51,9 +51,9 @@ class Graph
             newNode->next = array[dest].head;
             array[dest].head = newNode;
         }
-        /*
-         * Print the graph
-         */ 
+ 
+ 	
+        // Prints the graph
         void printGraph()
         {
             int v;
@@ -72,12 +72,28 @@ class Graph
 };
 
 
-int main(){
-
-	return 0;
+int main ( int argc, char *argv[] )
+{
+	if ( argc != 2 ) {
+		cout<<"Too many input parameters. Please only give one text file" << argv[0] << "<filename>\n";
+	}
+	else {
+		ifstream the_file ( argv[1] );
+		
+		if (!the_file.is_open() ){
+			cout<<"Couldn't open the file\n";
+		}
+		
+		else {
+			char x;
+			
+			while ( the_file.get(x))
+				cout<<x;
+		}
+	//file implicitly closed.
+	}
 }
 
-graph inputText(){
-
-}
-
+/*graph inputText(file fileInput){
+	
+}*/
