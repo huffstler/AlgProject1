@@ -41,52 +41,93 @@ public:
     list<int> *adj;
 public:
     Graph(int V) {
-        
-        
         this->V = V;
         adj = new list<int>[V];
         array = new AdjList [V];
-      //  for (int i = 0; i < V; ++i)
-      //      array[i].head = NULL;
     }
     
-    
-    // Creating New Adjacency List Node
+// Creating New Adjacency List Node
     AdjListNode* newAdjListNode (int dest) {
         AdjListNode* newNode = new AdjListNode;
         newNode->dest = dest;
         newNode->next = NULL;
         return newNode;
     }
-    
-    
-    // Adds an Edge to Graph
+	
+// Adds an Edge to Graph
     void addEdge (int src, int dest) {
-        /*
-        AdjListNode* newNode = newAdjListNode(dest);
-        newNode->next = array[src].head;
-        array[src].head = newNode;
-        newNode = newAdjListNode(src);
-        newNode->next = array[dest].head;
-        array[dest].head = newNode;
-         */
         adj[src].push_back(dest);
     }
     
-    //
-  /*  template <class ForwardIterator>
-    ForwardIterator max_element ( ForwardIterator first, ForwardIterator last )
-    {
-        if (first==last) return last;
-        ForwardIterator largest = first;
+    void BFS(int s, int maxDepth) {
+        int max=0;
+		int currentDepth = 0;
+        bool *visited = new bool[V];
+        string highestNode;
+// 	'i' will be used to get all adjacent vertices of a vertex
+        list<int>::iterator i;
+		
+        if (maxDepth == 0) { return; }
+		
+//     Mark all the vertices as not visited below
+        for(int i = 0; i < V; i++)
+            visited[i] = false;
+
+// 	Create a queue for BFS
+        list<int> queue;
+        list<int> depthqueue;
         
-        while (++first!=last)
-            if (*largest<*first)
-                largest=first;
-        return largest;
-    }*/
+// 	Mark the current node as visited and enqueue it
+        visited[s] = true;
+        queue.push_back(s);
+        
+        while(!queue.empty()) {
+			
+// 		Dequeue a vertex from queue and print it
+            s = queue.front();
+            queue.pop_front();
+            
+// 		Get all adjacent vertices of the dequeued vertex s
+// 		If a adjacent has not been visited, then mark it visited
+// 		and enqueue it
+            for(i = adj[s].begin(); i != adj[s].end(); ++i) {
+                if(!visited[*i]) {
+                    
+					currentDepth++;
+                    visited[*i] = true;
+                    queue.push_back(*i);
+					
+                }
+            }
+
+            std::string q = std::to_string(s);
+            
+            if(currentDepth > max){
+                max = currentDepth;
+                highestNode = q;
+            }
+            currentDepth = 0;
+        }
+        cout << highestNode << "   ";
+    }
     
-    void BFS(int s, int maxDepth)
+    
+    // Prints the graph
+    void printGraph() {
+        int v;
+        for (v = 0; v < V; ++v){
+            AdjListNode* pCrawl = array[v].head;
+            cout<<"\n Adjacency list of vertex "<<v<<"\n head ";
+            while (pCrawl){
+                cout<<"-> "<<pCrawl->dest;
+                pCrawl = pCrawl->next;
+            }
+            cout<<endl;
+        }
+    }
+};
+
+void BFS2(int s, int maxDepth)
     {
         int max=0;
         string highestNode;
@@ -164,46 +205,7 @@ public:
             } 
         }*/
     }
-    
-    
-    // Prints the graph
-    void printGraph() {
-        int v;
-        for (v = 0; v < V; ++v){
-            AdjListNode* pCrawl = array[v].head;
-            cout<<"\n Adjacency list of vertex "<<v<<"\n head ";
-            while (pCrawl){
-                cout<<"-> "<<pCrawl->dest;
-                pCrawl = pCrawl->next;
-            }
-            cout<<endl;
-        }
-    }
-};
 
-
-/*
-int main ( int argc, char *argv[] ) {
-    if ( argc != 2 ) {
-        cout<<"Too many input parameters. Please only give one text file" << argv[0] << "<filename>\n";
-    }
-    else {
-        ifstream the_file ( argv[1] );
-        
-        if (!the_file.is_open() ){
-            cout<<"Couldn't open the file\n";
-        }
-        
-        else {
-            char x;
-            
-            while ( the_file.get(x))
-                cout<<x;
-        }
-        //file implicitly closed.
-    }
-}
-*/
 int main(){
     //create test graph
     
