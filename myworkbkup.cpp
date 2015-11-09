@@ -15,6 +15,7 @@ struct AdjListNode{
 };
 struct AdjList{
 	struct AdjListNode *head;
+	string title;
 };
 
 class Graph
@@ -83,24 +84,39 @@ int main(){
 }
 
 void importData(){
+	
+	/* Importing data kind of like this:
+
+		
+   headCnt _ _ _ _
+		/ |_|_|_|_|
+		| |_|_|_|_|
+		| |_|_|_|_|
+		\ |_|_|_|_|
+		  \_______/	
+		   tailCnt
+		*/
 	//Graph g(1720);
 	int hashArray[3449] = { 0 };
-	Graph g(1);
-	string tempString;
-	int count1 = 0;
-	int count2 = 0;
-	while (getline(cin, tempString, '\n')){ //reads in a line from ideone
-		stringstream iss(tempString);
-		getline(iss, tempString, ':'); // tempString is currently the parent vert
-		string head = tempString;
-		count1++;
-		while (getline(iss, tempString, ',')){ //go through the line and set tempString to each other vert
-			tempString.erase(0, 1);
-			
-			count2++;
+	Graph g(1720);
+	string headString;
+	string tailString
+	int headCnt = 0;
+	int tailCnt = 0;
+	while (getline(cin, headString, '\n')){ //reads in a line from ideone
+		stringstream iss(headString);
+		getline(iss, headString, ':'); // headString is currently the parent vert
+		string head = headString;
+		headCnt++; //Number of rows
+		tailString = headString;
+		while (getline(iss, tailString, ',')){ //go through the line and set tailString to each other vert
+			tailString.erase(0, 1);
+			g.addEdge(headCnt, tailCnt, tailString);
+			cout << "Edge: " << headCnt << " " << tailCnt << " Added. It connects" << tempString << " to ."<< endl; 
+			tailCnt++; //Number of columns (Sort of)
 		}
 	}
-	cout << "Count1: " << count1 << endl;
-	cout << "Count2: " << count2 << endl;
-	cout << "Total count: " << count1+count2 << endl;
+	cout << "Count1: " << headCnt << endl;
+	cout << "Count2: " << tailCnt << endl;
+	cout << "Total count: " << headCnt+tailCnt << endl;
 }
