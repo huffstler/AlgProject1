@@ -1,11 +1,3 @@
-//
-//  main.cpp
-//  AlgProject1
-//
-//  Created by Foster Clark on 11/8/15.
-//  Copyright © 2015 Foster Clark. All rights reserved.
-//
-
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
@@ -35,7 +27,7 @@ struct AdjList{
 };
 
 class Graph {
-public:
+private:
     int V;
     struct AdjList* array;
     list<int> *adj;
@@ -59,7 +51,61 @@ public:
         adj[src].push_back(dest);
     }
     
-    void BFS(int s, int maxDepth) {
+	// where amnt is the amount of objects you're returning, node is the root node and depth is the layer which the algorithm stops at.  ( 1 is direct children, 2 is grandchildren etc, etc)
+	//string BFS1(int amnt, string node, int dpth) { 
+	//	int amount = amnt;
+	//	string root = node;
+	//	int depth = dpth;
+	//	bool *visited = new bool[V];
+		//string highestNode;
+// 	'i' will be used to get all adjacent vertices of a vertex
+	//	list<int>::iterator i;
+		
+	//	if (depth == 0) { return root; }
+		
+//     Mark all the vertices as not visited below
+	//	for(int i = 0; i < V; i++)
+	//		visited[i] = false;
+
+// 	Create a queue for BFS
+	//	list<int> queue;
+	//	list<int> depthqueue;
+		
+	//}
+// 	Mark the current node as visited and enqueue it
+		//visited[s] = true;				//HAS TO CHANGE USES INT TO FIND NODE
+		//queue.push_back(s);		//HAS TO CHANGE USES INT TO PUSH NODE
+		
+	//	while(!queue.empty()) {
+			
+// 		Dequeue a vertex from queue and print it
+			//s = queue.front();
+	//		queue.pop_front();
+			
+// 		Get all adjacent vertices of the dequeued vertex s
+// 		If a adjacent has not been visited, then mark it visited
+// 		and enqueue it
+	//		for(i = adj[s].begin(); i != adj[s].end(); ++i) {
+	//			if(!visited[*i]) {
+					
+	//				currentDepth++;
+	//				visited[*i] = true;
+	//				queue.push_back(*i);
+					
+	//			}
+			//}
+
+//			std::string q = std::to_string(s);
+			
+//			if(currentDepth > max){
+//				max = currentDepth;
+//				highestNode = q;
+//			}
+//			currentDepth = 0;
+		//}
+		//cout << highestNode << "   ";
+	
+    void BFS2(int s, int maxDepth) {
         int max=0;
 		int currentDepth = 0;
         bool *visited = new bool[V];
@@ -111,8 +157,7 @@ public:
         cout << highestNode << "   ";
     }
     
-    
-    // Prints the graph
+// Prints the graph
     void printGraph() {
         int v;
         for (v = 0; v < V; ++v){
@@ -127,106 +172,8 @@ public:
     }
 };
 
-void BFS2(int s, int maxDepth)
-    {
-        int max=0;
-        string highestNode;
-        
-      //  list<int> maxSP;
-        if (maxDepth == 0) { return; }
-        int currentDepth = 0;
-        // Mark all the vertices as not visited
-        bool *visited = new bool[V];
-        for(int i = 0; i < V; i++)
-            visited[i] = false;
-        
-        // Create a queue for BFS
-        list<int> queue;
-        list<int> depthqueue;
-        
-        // Mark the current node as visited and enqueue it
-        visited[s] = true;
-        queue.push_back(s);
-        
-        // 'i' will be used to get all adjacent vertices of a vertex
-        list<int>::iterator i;
-        
-        while(!queue.empty())
-        {
-            // Dequeue a vertex from queue and print it
-            s = queue.front();
-          //  cout << s << " ";
-            queue.pop_front();
-            
-            // Get all adjacent vertices of the dequeued vertex s
-            // If a adjacent has not been visited, then mark it visited
-            // and enqueue it
-            for(i = adj[s].begin(); i != adj[s].end(); ++i)
-            {
-                if(!visited[*i])
-                {
-                    currentDepth++;
-                  //  cout << currentDepth << "D ";
-                    visited[*i] = true;
-                    queue.push_back(*i);
-                }
-
-            }
-            
-       //     maxSP.push_back(currentDepth);
-       //     m = maxSP.back();
-            std::string q = std::to_string(s);
-            
-            if(currentDepth > max){
-                max = currentDepth;
-                highestNode = q;
-            }
-           // cout << highestNode << "";
-            currentDepth = 0;
-           // cout << maxSP.max_element << " ";
-            
-
-            
-            
-        }
-        cout << highestNode << "   ";
-
-        
-
-        
-       /* queue.push(firstNode);
-        depthQueue.push(0);
-        while (!bfsQueue.empty()) {
-            f = bfsQueue.front();
-            depth = depthQueue.front();
-            bfsQueue.pop(), depthQueue.pop();
-            for (every node adjacent to f) {
-                bfsQueue.push(node), depthQueue.push(depth+1);
-            } 
-        }*/
-    }
 
 int main(){
-    //create test graph
     
-    //node 0 --> 1,2,
-    //node 1 --> 3,4,5
-    //node 2 --> 6
-    //node 3 --> 7
-    
-    Graph g(8);
-    g.addEdge(0,1);
-    g.addEdge(0,2);
-    g.addEdge(1,3);
-    g.addEdge(1,4);
-    g.addEdge(1,5);
-    g.addEdge(2,6);
-    g.addEdge(3,7);
-    
-   // g.func1(0, 1, 2);
-   // g.BFS(0);
-    g.BFS(0, 2);
-    
-    //returns the node that has the highest number of children
     
 }
