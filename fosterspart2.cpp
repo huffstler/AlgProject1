@@ -52,58 +52,58 @@ public:
     }
     
 	// where amnt is the amount of objects you're returning, node is the root node and depth is the layer which the algorithm stops at.  ( 1 is direct children, 2 is grandchildren etc, etc)
-	//string BFS1(int amnt, string node, int dpth) { 
-	//	int amount = amnt;
-	//	string root = node;
-	//	int depth = dpth;
-	//	bool *visited = new bool[V];
-		//string highestNode;
+	void BFS1 (int s, int maxDepth) {
+        int max=0;
+		int currentDepth = 0;
+        bool *visited = new bool[V];
+        string highestNode;
 // 	'i' will be used to get all adjacent vertices of a vertex
-	//	list<int>::iterator i;
+        list<int>::iterator i;
 		
-	//	if (depth == 0) { return root; }
+        if (maxDepth == 0) { return; }
 		
 //     Mark all the vertices as not visited below
-	//	for(int i = 0; i < V; i++)
-	//		visited[i] = false;
+        for(int i = 0; i < V; i++)
+            visited[i] = false;
 
 // 	Create a queue for BFS
-	//	list<int> queue;
-	//	list<int> depthqueue;
-		
-	//}
+        list<int> queue;
+        list<int> depthqueue;
+        
 // 	Mark the current node as visited and enqueue it
-		//visited[s] = true;				//HAS TO CHANGE USES INT TO FIND NODE
-		//queue.push_back(s);		//HAS TO CHANGE USES INT TO PUSH NODE
-		
-	//	while(!queue.empty()) {
+        visited[s] = true;
+        queue.push_back(s);
+        
+        while(!queue.empty()) {
 			
 // 		Dequeue a vertex from queue and print it
-			//s = queue.front();
-	//		queue.pop_front();
-			
+            s = queue.front();
+            queue.pop_front();
+            
 // 		Get all adjacent vertices of the dequeued vertex s
 // 		If a adjacent has not been visited, then mark it visited
 // 		and enqueue it
-	//		for(i = adj[s].begin(); i != adj[s].end(); ++i) {
-	//			if(!visited[*i]) {
+            for(i = adj[s].begin(); i != adj[s].end(); ++i) {
+                if(!visited[*i]) {
+                    
+					currentDepth++;
+                    visited[*i] = true;
+                    queue.push_back(*i);
 					
-	//				currentDepth++;
-	//				visited[*i] = true;
-	//				queue.push_back(*i);
-					
-	//			}
-			//}
+                }
+            }
 
-//			std::string q = std::to_string(s);
-			
-//			if(currentDepth > max){
-//				max = currentDepth;
-//				highestNode = q;
-//			}
-//			currentDepth = 0;
-		//}
-		//cout << highestNode << "   ";
+            std::string q = std::to_string(s);
+            
+            if(currentDepth > max){
+                max = currentDepth;
+                highestNode = q;
+            }
+            currentDepth = 0;
+        }
+        cout << highestNode << "   ";
+    }
+	
 	
     void BFS2(int s, int maxDepth) {
         int max=0;
@@ -156,6 +156,8 @@ public:
         }
         cout << highestNode << "   ";
     }
+	
+	
     
 // Prints the graph
     void printGraph() {
@@ -171,7 +173,6 @@ public:
         }
     }
 };
-
 
 int main(){
     
