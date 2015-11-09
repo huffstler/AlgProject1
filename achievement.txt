@@ -2,12 +2,12 @@ achievement.txt
 
 Finished Tasks:
 	Reading text into a graph
+	Part 2, finding the child with most children from given Vertice.
 	
-Mostly Complete tasks:
-	Part 2, finding the child with most children from given Vertice. Need to make this work by having a string as a parameter, not a integer.
-	
-Not Yet Complete Tasks:
+Tasks in Progress:
 	Part 1, Returning certain amount of vertices of order x from vertice "string"
+
+Not Yet Complete Tasks:
 	Part 3, finding lowest common ancestor of SP2 and SP3
 	
 What could we do to improve?
