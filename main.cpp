@@ -157,64 +157,17 @@ public:
 		}
 	}
 
-	/*void readFlightSchedules() {
-
-	unsigned numOfCities, numOfFlights, cycSize;
-	//read in number of cities(TODO:in current implementation..not reqd), number of edges and the desired tour size
-	cin >> numOfCities >> numOfFlights >> cycSize;
-
-	while (numOfFlights--)
-	{
-	string fromCity, toCity;
-	unsigned cost;
-
-	cin >> fromCity >> toCity >> cost;
-	//find if a vertex for the city already exists, if so get that
-	Node *u = findNodeByName(fromCity);
-	if (u == NULL)
-	{
-	u = new Node(fromCity);
-	addNewNode(u);
-	}
-
-	//find if a vertex for the city already exists, if so get that
-	Node *v = findNodeByName(toCity);
-	if (v == NULL)
-	{
-	v = new Node(toCity);
-	addNewNode(v);
-	}
-
-	u->addAdjNode(v, cost);
-	}
-	desiredCycSize = cycSize;
-	}*/
-
 };
-
-
-
-
-
-
-
-
-
-
-
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void importData();
 Graph G;
-
 
 int main(){
 	importData();
 	system("pause");
 	return 0;
 }
-
-
 
 void importData(){
 
@@ -259,13 +212,10 @@ void importData(){
 			//	cout << tempString << endl;
 		}
 	}
-	cout << count << endl;
+	//cout << count << endl;
 	//G.findNodeByName("artefact")->displayList();
 	string E = G.findNodeByName("artefact")->adjNodeList[0].orgNode->name;
 			cout << E << endl;
 			G.displayGraph();
-	//E.orgNode->getName
-
-	//cout << E << endl;
 
 }
