@@ -4,7 +4,7 @@ Finished Tasks:
 	Reading text into a graph
 	Part 2, finding the child with most children from given Vertice.
 	
-Tasks in Progress:
+Almost Done:
 	Part 1, Returning certain amount of vertices of order x from vertice "string"
 
 Not Yet Complete Tasks:
@@ -12,6 +12,5 @@ Not Yet Complete Tasks:
 	
 What could we do to improve?
 	We want to use a hashmap to further increase the speed of inserting and finding the objects in our graph, we did not have time to add the feature in without bugs however.
-	Part 2 currently finds vertices based on numbers not strings. It's an easy fix once we have a little more time with the program.
 	Part 1 and 3 need a little more time to complete. Especially part 3 because of its complexity compared to the other parts of the program.
 	We also don't have much running time data as our methods aren't all complete. We would need more time to come up with the numbers to show how it runs.
