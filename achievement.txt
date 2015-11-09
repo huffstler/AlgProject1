@@ -1,0 +1,16 @@
+achievement.txt
+
+Finished Tasks:
+	Reading Text into a graph object
+	
+Mostly Complete tasks:
+	Part 2, finding the child with most children from given Vertice
+	
+Not Yet Complete Tasks:
+	Part 1, Returning certain amount of vertices of order x from vertice "string"
+	Part 3, finding lowest common ancestor of SP2 and SP3
+	
+What could we do to improve?
+	We want to use a hashmap to further increase the speed of inserting and finding the objects in our graph, we did not have time to add the feature in without bugs however.
+	Part 2 currently finds vertices based on numbers not strings. It's an easy fix once we have a little more time with the program.
+	Part 1 and 3 need a little more time to complete. Especially part 3 because of its complexity compared to the other parts of the program.
