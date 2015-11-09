@@ -15,6 +15,14 @@
 #include <array>
 #include <list>
 
+//########################
+//						CHANGES					  #
+// addEdge - Changed ALOT				  #
+// graph constructor: changed a little   #
+// added new function BFS				  #
+// main changed a little						  #
+//########################
+
 using namespace std;
 
 struct AdjListNode{
