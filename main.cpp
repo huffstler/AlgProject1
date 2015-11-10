@@ -8,6 +8,7 @@
 #include <array>
 #include <sstream>
 #include <unordered_map>
+#include <list>
 using namespace std;
 
 enum Status {
@@ -168,10 +169,10 @@ Graph G;
 
 int main(){
 	importData();
-	cout << "What string would like to perfrom problem 2 on" << endl;
-	string x;
-	cin >> x;
-	BFS2(x);
+	//cout << "What string would like to perfrom problem 2 on" << endl;
+	//string x;
+	//cin >> x;
+	//BFS2(x);
 	//system("pause");
 	return 0;
 }
@@ -241,7 +242,7 @@ string Problem1(int depth, string s, int amt){
 			
 			
 			if ((temp = r->adjNodeList[j].dstNode)->adjNodeList.size() >= amt){
-				temp->addAdjNode;
+				temp->addAdjNode(r); // I'm assuming that you want to add the r node here
 			}
 		}
 	}
@@ -259,7 +260,7 @@ string Problem2(string s) {
 	//if (maxDepth == 0) { return; }
 
 	//     Mark all the vertices as not visited below
-	G.clearVisited;
+	G.clearVisited();
 //	for (int i = 0; i < V; i++)
 //		visited[i] = false;
 
