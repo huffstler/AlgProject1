@@ -159,17 +159,6 @@ public:
 	}
 };
 
-
-
-
-
-
-
-
-
-
-
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void importData();
 string Problem2(string);
@@ -186,8 +175,6 @@ int main(){
 	//system("pause");
 	return 0;
 }
-
-
 
 void importData(){
 
@@ -259,8 +246,6 @@ string Problem1(int depth, string s, int amt){
 		}
 	}
 }
-
-
 
 string Problem2(string s) {
 	Node* r = G.findNodeByName(s);
