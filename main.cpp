@@ -162,20 +162,50 @@ public:
 void importData();
 bool Problem1(int, string, int);
 string Problem2(string);
-string Problem3(Node*, Node*, Node*);
+string Problem3(string, string, string);
 Graph G;
 
 
 int main(){
+// This is used for deciding what method to run.	
+	int choice;
+//Variables used for method 1
+	int amount;
+	string root; // This is also the only variable needed for Operation 2
+	int order;
+//Varables used for method 3
+	string Ancestor;
+	string SpA;
+	string SpB;
+
 	importData();
-	cout << "Problem 1 answer = " << Problem1(3,"mammal",2) << endl; 	//Return 3 nodes that are Children of the children of mammal. (Grandchildren of Canidae) 
-	//cout << "The answer to Problem 2 is: " << Problem2("placental") << endl;
-	//cout << Problem2("artefact") << endl;
-	//cout << "What string would like to perfrom problem 2 on" << endl;
-	//string x;
-	//cin >> x;
-	//BFS2(x);
-	//system("pause");
+	
+	cout << "Which operation would you like to perform? 1, 2, or 3?" << endl;	
+	getline(cin, choice);
+	cout << choice;
+	if (choice == 1) {
+		cout << "Please enter the parameters of your choosing. Amount, Root Node, Order. \nAmount:";
+		cin >> amount;
+		
+		cout << "Root Node: ";
+		cin >> root;
+		
+		cout << "Order: ";
+		cin >> order;
+		
+		//cout << "The result for Operation 1 = " << Problem1(amount, root, order) << endl;
+	
+	}	else if (choice == 2) {
+		cout << "Please enter the parameters. Root Node. \nRoot Node:";
+		cin >> root;
+		cout << root;
+		cout << "Problem 2 answer = " << Problem2(root) << endl; 	//Return 3 nodes that are Children of the children of mammal. (Grandchildren of Canidae) 
+	
+	} else if (choice == 3) {
+		//cout << "The result for Operation 3 = " << Problem3(SpA, SpB, Ancestor) << endl;
+	} else {
+		cout << "Incorrect input. Please try again.";
+	}
 	return 0;
 }
 
@@ -233,10 +263,10 @@ void importData(){
 
 }
 
-bool Problem1(int amount, string s, int order) { // we return a list of  all the specific nodes
-	Node* r = G.findNodeByName(s);
-	Node** nArray[] = new Node[ order];
-}
+//bool Problem1(int amount, string s, int order) { // we return a list of  all the specific nodes
+//	Node* r = G.findNodeByName(s);
+//	Node** nArray[] = new Node[ order];
+//}
 
 string Problem2(string s) {
 	Node* r = G.findNodeByName(s);
@@ -255,9 +285,9 @@ string Problem2(string s) {
 	while (!queue.empty()) {
 
 		r = queue.front();	//Dequeue a vertex from queue and print it
-		cout << "About to pop vertex: " << r->name << endl;
+		//cout << "About to pop vertex: " << r->name << endl;
 		queue.pop_front();
-		cout << "Popped: " << r->name << endl;
+		//cout << "Popped: " << r->name << endl;
 
 		// 		Get all adjacent vertices of the dequeued vertex s
 		// 		If a adjacent has not been visited, then mark it visited
@@ -269,7 +299,7 @@ string Problem2(string s) {
 			if (r->adjNodeList[i].dstNode->status == NOT_VISITED){
 				numChildren++;
 				//cout << "2" << endl;
-				cout << "We are going to set: " << r->adjNodeList[i].dstNode->name << " to visited" << endl;
+				//cout << "We are going to set: " << r->adjNodeList[i].dstNode->name << " to visited" << endl;
 				r->adjNodeList[i].dstNode->status = VISITED;
 				//cout << "3" << endl;
 				queue.push_back(r->adjNodeList[i].dstNode);
