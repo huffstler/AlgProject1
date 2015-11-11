@@ -160,15 +160,16 @@ public:
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void importData();
-string Problem2(string);
 string Problem1(int, string, int);
+string Problem2(string);
 string Problem3(Node*, Node*, Node*);
 Graph G;
 
 
 int main(){
 	importData();
-	cout << "The answer to Problem 2 is: " << Problem2("placental") << endl;
+	cout << "Problem 1 answer = " << Problem1(3,"canidae",2) << endl; 	//Return 3 nodes that are Children of the children of canidae. (Grandchildren of Canidae) 
+	//cout << "The answer to Problem 2 is: " << Problem2("placental") << endl;
 	//cout << Problem2("artefact") << endl;
 	//cout << "What string would like to perfrom problem 2 on" << endl;
 	//string x;
@@ -232,26 +233,47 @@ void importData(){
 
 }
 
-string Problem1(int depth, string s, int amt){
+string Problem1(int amount, string s, int order) { // we return a list of  all the specific nodes
 	Node* r = G.findNodeByName(s);
-	Node* temp = r;
-	for (int currDepth = 0; currDepth < depth; currDepth++){   //one
-		for (int j = 0; j < r->adjNodeList.size(); j++){		//two
-			if (r->adjNodeList[j].dstNode->adjNodeList.size() >= temp->adjNodeList.size()){ //three
-				temp = r->adjNodeList[j].dstNode;
-			}
+	int max = 0;								// Probably Need
+	int numChildren = 0; 				// Probably need
+	Node* retArray[amount];			// We will put all the nodes that we care about in this list and return it.
+	list<int>::iterator i;					// 'i' will be used to get all adjacent vertices of a vertex
+	list<Node*> queue;					// Create a queue for BFS
 
+	G.clearVisited();						// Mark all the vertices as not visited below
+	r->status = VISITED;				//Mark the current node as visited
+	queue.push_back(r);					//enqueue the node
 
-			if ((temp = r->adjNodeList[j].dstNode)->adjNodeList.size() >= amt){
-				temp->addAdjNode(r); // I'm assuming that you want to add the r node here
+	while (!queue.empty()) {
+		
+		r = queue.front();					//Dequeue a vertex from queue and print it
+		//cout << "About to pop vertex: " << r->name << endl;
+		queue.pop_front();
+		//cout << "Popped: " << r->name << endl;
+
+		// 		Get all adjacent vertices of the dequeued vertex s
+		// 		If a adjacent has not been visited, then mark it visited
+		// 		and enqueue it
+		cout << "There are: " << r->adjNodeList.size() << " vertices incident to " << r->name << endl;
+		for (int i = 0; i < r->adjNodeList.size(); i++){ // for each node incident to r
+			//cout << "1" << endl; // I think you just need to add another for loop right here.
+			if (r->adjNodeList[i].dstNode->status == NOT_VISITED){
+				numChildren++;
+				//cout << "2" << endl;
+				//cout << "We are going to set: " << r->adjNodeList[i].dstNode->name << " to visited" << endl;
+				r->adjNodeList[i].dstNode->status = VISITED;
+				//cout << "3" << endl;
+				queue.push_back(r->adjNodeList[i].dstNode);
 			}
 		}
+		if (numChildren > max){
+			max = numChildren;
+			highestNode = r->name;
+		}
+		numChildren = 0;
 	}
-	string temp2 = temp->getName();
-	cout << temp2 << " ";
-	return temp->getName();
-
-
+	return highestNode; // Must return the array with the requested children. so retArray
 }
 
 string Problem2(string s) {
