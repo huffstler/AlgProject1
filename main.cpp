@@ -1,5 +1,3 @@
-Patrick
-
 #define WIN32_LEAN_AND_MEAN
 #include <cstdlib>
 #include <iostream>
@@ -256,8 +254,6 @@ string Problem1(int depth, string s, int amt){
 
 }
 
-
-
 string Problem2(string s) {
 	Node* r = G.findNodeByName(s);
 	int max = 0;
@@ -269,32 +265,29 @@ string Problem2(string s) {
 	G.clearVisited();	//Mark all the vertices as not visited below
 	list<Node*> queue;	//Create a queue for BFS
 
-
-
 	r->status = VISITED;	//Mark the current node as visited
 	queue.push_back(r);		//enqueue the node
 
 	while (!queue.empty()) {
 
-
 		r = queue.front();	//Dequeue a vertex from queue and print it
-		cout << "were about to pop: " << r->name << endl;
+		cout << "About to pop vertex: " << r->name << endl;
 		queue.pop_front();
-		cout << "We just popped: " << r->name << endl;
+		cout << "Popped: " << r->name << endl;
 
 		// 		Get all adjacent vertices of the dequeued vertex s
 		// 		If a adjacent has not been visited, then mark it visited
 		// 		and enqueue it
-		//	for (i = adj[s].begin(); i != adj[s].end(); ++i) {
-		cout << "Were about to itterate: " << r->adjNodeList.size() << " times" << endl;
-		for (int i = 1; i<r->adjNodeList.size(); i++){
-			cout << "1" << endl;
+		//			for (i = adj[s].begin(); i != adj[s].end(); ++i) {
+		cout << "There are: " << r->adjNodeList.size() << " vertices incident to " << r->name << endl;
+		for (int i = 0; i<r->adjNodeList.size(); i++){
+			//cout << "1" << endl;
 			if (r->adjNodeList[i].dstNode->status == NOT_VISITED){
 				numChildren++;
-				cout << "2" << endl;
+				//cout << "2" << endl;
 				cout << "We are going to set: " << r->adjNodeList[i].dstNode->name << " to visited" << endl;
 				r->adjNodeList[i].dstNode->status = VISITED;
-				cout << "3" << endl;
+				//cout << "3" << endl;
 				queue.push_back(r->adjNodeList[i].dstNode);
 			}
 		}
