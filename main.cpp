@@ -1,3 +1,5 @@
+Patrick
+
 #define WIN32_LEAN_AND_MEAN
 #include <cstdlib>
 #include <iostream>
@@ -7,8 +9,8 @@
 #include <string>
 #include <array>
 #include <sstream>
-#include <unordered_map>
 #include <list>
+
 using namespace std;
 
 enum Status {
@@ -101,7 +103,6 @@ public:
 			Edge edg = adjNodeList[i];
 			cout << " -> " << edg.getDstNode()->getName();
 		}
-
 	}
 };
 
@@ -111,7 +112,6 @@ class Graph
 public:
 	vector<Node*> nodeList;//list of verticies
 	bool foundCycle;//true if a cycle is found, false otherwise
-	int desiredCycSize;
 
 	void clearVisited()
 	{
@@ -155,7 +155,7 @@ public:
 		for (int i = 0; i < nodeList.size(); i++)
 		{
 			nodeList[i]->displayList();
-			cout << "~~EOL~~" << endl;
+			//	cout << "~~EOL~~" << endl;
 		}
 	}
 };
@@ -164,11 +164,14 @@ public:
 void importData();
 string Problem2(string);
 string Problem1(int, string, int);
+string Problem3(Node*, Node*, Node*);
 Graph G;
 
 
 int main(){
 	importData();
+	cout << "The answer to Problem 2 is: " << Problem2("placental") << endl;
+	//cout << Problem2("artefact") << endl;
 	//cout << "What string would like to perfrom problem 2 on" << endl;
 	//string x;
 	//cin >> x;
@@ -191,12 +194,12 @@ void importData(){
 		getline(iss, tempStringP, ':'); // tempString is currently the parent vert
 		Node* PNode = G.findNodeByName(tempStringP);
 		if (PNode){
-				cout << "found matching node: " << tempStringP << endl;
+			//cout << "found matching node: " << tempStringP << endl;
 		}
 		else{
 			PNode = new Node(tempStringP);
 			G.addNewNode(PNode);
-			cout << "added Node: " << tempStringP << " as a parent node" << endl;
+			//cout << "added Node: " << tempStringP << " as a parent node" << endl;
 			//cout << tempString << endl;
 			count++;
 		}
@@ -204,7 +207,7 @@ void importData(){
 			tempStringC.erase(0, 1);
 			//check if this string is already currently a vert
 			if (Node* N = G.findNodeByName(tempStringC)){
-				cout << "found matching node: " << tempStringC << endl;
+				//cout << "found matching node: " << tempStringC << endl;
 				PNode->addAdjNode(N);
 			}
 			else{
@@ -224,7 +227,7 @@ void importData(){
 	//G.findNodeByName("artefact")->displayList();
 	//string E = G.findNodeByName("artefact")->adjNodeList[0].orgNode->name;
 	//cout << E << endl;
-	G.displayGraph();
+	//G.displayGraph();
 	//E.orgNode->getName
 
 	//cout << E << endl;
@@ -234,75 +237,72 @@ void importData(){
 string Problem1(int depth, string s, int amt){
 	Node* r = G.findNodeByName(s);
 	Node* temp = r;
-	for (int currDepth = 0; currDepth < depth; currDepth++){   //one 
+	for (int currDepth = 0; currDepth < depth; currDepth++){   //one
 		for (int j = 0; j < r->adjNodeList.size(); j++){		//two
 			if (r->adjNodeList[j].dstNode->adjNodeList.size() >= temp->adjNodeList.size()){ //three
 				temp = r->adjNodeList[j].dstNode;
 			}
-			
-			
+
+
 			if ((temp = r->adjNodeList[j].dstNode)->adjNodeList.size() >= amt){
 				temp->addAdjNode(r); // I'm assuming that you want to add the r node here
 			}
 		}
 	}
+	string temp2 = temp->getName();
+	cout << temp2 << " ";
+	return temp->getName();
+
+
 }
+
+
 
 string Problem2(string s) {
 	Node* r = G.findNodeByName(s);
 	int max = 0;
 	int numChildren = 0;
-	//bool *visited = new bool[V];
 	string highestNode;
-	// 	'i' will be used to get all adjacent vertices of a vertex
-	list<int>::iterator i;
 
-	//if (maxDepth == 0) { return; }
+	list<int>::iterator i;	//'i' will be used to get all adjacent vertices of a vertex
 
-	//     Mark all the vertices as not visited below
-	G.clearVisited();
-//	for (int i = 0; i < V; i++)
-//		visited[i] = false;
+	G.clearVisited();	//Mark all the vertices as not visited below
+	list<Node*> queue;	//Create a queue for BFS
 
-	// 	Create a queue for BFS
-	list<Node*> queue;
-//	list<Node*> depthqueue;
 
-	// 	Mark the current node as visited and enqueue it
-	r->status = VISITED;
-	//visited[s] = true;
-	queue.push_back(r);
+
+	r->status = VISITED;	//Mark the current node as visited
+	queue.push_back(r);		//enqueue the node
 
 	while (!queue.empty()) {
 
-		// 		Dequeue a vertex from queue and print it
-		r = queue.front();
+
+		r = queue.front();	//Dequeue a vertex from queue and print it
+		cout << "were about to pop: " << r->name << endl;
 		queue.pop_front();
-		cout <<"We just popped: "<< r->name << endl;
+		cout << "We just popped: " << r->name << endl;
 
 		// 		Get all adjacent vertices of the dequeued vertex s
 		// 		If a adjacent has not been visited, then mark it visited
 		// 		and enqueue it
-	//	for (i = adj[s].begin(); i != adj[s].end(); ++i) {
-		for (int i = 0; r->adjNodeList.size(); i++){
-		//	for (int i = 0; i < nodeList.size(); i++)
-		//	if (!visited[*i]) {
+		//	for (i = adj[s].begin(); i != adj[s].end(); ++i) {
+		cout << "Were about to itterate: " << r->adjNodeList.size() << " times" << endl;
+		for (int i = 1; i<r->adjNodeList.size(); i++){
+			cout << "1" << endl;
 			if (r->adjNodeList[i].dstNode->status == NOT_VISITED){
 				numChildren++;
-				r->adjNodeList[i].dstNode->status == VISITED;
+				cout << "2" << endl;
+				cout << "We are going to set: " << r->adjNodeList[i].dstNode->name << " to visited" << endl;
+				r->adjNodeList[i].dstNode->status = VISITED;
+				cout << "3" << endl;
 				queue.push_back(r->adjNodeList[i].dstNode);
-
 			}
 		}
-
-		//string q = to_string(s);
-
 		if (numChildren > max){
 			max = numChildren;
 			highestNode = r->name;
 		}
 		numChildren = 0;
 	}
-	cout << highestNode << "   ";
-	return r->name;
+	return highestNode;
 }
