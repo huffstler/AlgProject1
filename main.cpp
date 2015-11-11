@@ -160,7 +160,7 @@ public:
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void importData();
-Node** Problem1(int, string, int);
+bool Problem1(int, string, int);
 string Problem2(string);
 string Problem3(Node*, Node*, Node*);
 Graph G;
@@ -233,65 +233,9 @@ void importData(){
 
 }
 
-Node** Problem1(int amount, string s, int order) { // we return a list of  all the specific nodes
+bool Problem1(int amount, string s, int order) { // we return a list of  all the specific nodes
 	Node* r = G.findNodeByName(s);
-	int max = 0;								// Probably Need
-	int numChildren = 0; 				// Probably need
-	Node** arr =  new Node*[amount];			// We will put all the nodes that we care about in this list and return it.
-	list<int>::iterator i;					// 'i' will be used to get all adjacent vertices of a vertex
-	list<Node*> queue;					// Create a queue for BFS
-	int layer = 0;							//Set local counter to keep track of layers you've travelled through
-
-	G.clearVisited();						// Mark all the vertices as not visited below
-	r->status = VISITED;				//Mark the current node as visited
-	queue.push_back(r);					//enqueue the node
-
-	while (!queue.empty()) {
-		if(layer == order){
-			r = queue.front();					//Dequeue a vertex from queue and print it
-			queue.pop_front();
-			cout << "Popped: " << r->name << endl;
-
-			// 		Get all adjacent vertices of the dequeued vertex s
-			// 		If a adjacent has not been visited, then mark it visited
-			// 		and enqueue it
-			cout << "We are currently on layer: " << layer << endl;
-			cout << "There are: " << r->adjNodeList.size() << " vertices on layer: " << layer << endl;
-			
-			for (int i = 0; i < r->adjNodeList.size(); i++){ // for each node incident to r
-				
-				//cout << "1" << endl; // I think you just need to add another for loop right here.
-				if (r->adjNodeList[i].dstNode->status == NOT_VISITED){
-					numChildren++;
-					//cout << "2" << endl;
-					//cout << "We are going to set: " << r->adjNodeList[i].dstNode->name << " to visited" << endl;
-					r->adjNodeList[i].dstNode->status = VISITED;
-					//cout << "3" << endl;
-					queue.push_back(r->adjNodeList[i].dstNode);
-				}
-				cout << "Size: " <<  r->adjNodeList.size()-1 << endl;
-				i += r->adjNodeList.size()-1;
-			}
-		}
-		else{
-			r = queue.front();					//Dequeue a vertex from queue and print it
-			queue.pop_front();
-			cout << "Popped: " << r->name << endl;
-
-			// 		Get all adjacent vertices of the dequeued vertex s
-			// 		If a adjacent has not been visited, then mark it visited
-			// 		and enqueue it
-			cout << "We are currently on layer: " << layer << endl;
-			cout << "There are: " << r->adjNodeList.size() << " vertices on layer: " << layer << endl;
-			layer++; //maybe put it outside this while as well?
-		}
-/*		if (numChildren > max){
-			max = numChildren;
-			highestNode = r->name;
-		}*/
-		numChildren = 0;
-	}
-	return &arr; // Must return the array with the requested children. so retArray
+	Node** nArray[] = new Node[ order];
 }
 
 string Problem2(string s) {
